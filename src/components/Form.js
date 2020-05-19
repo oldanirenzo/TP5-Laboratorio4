@@ -82,12 +82,7 @@ class Form extends Component {
         return (
             <React.Fragment>
                 <NavBar></NavBar>
-
-
-                <button type="submit" className="btn btn-primary" >Nuevo</button>
-                <button type="button" className="btn btn-secondary">Actualizar</button>
-                <button type="button" className="btn btn-danger">Borrar</button>
-
+                
                 <div className="container w-50 pt-3">
                     <form onSubmit={this.submitHandler} className="form-group" encType="multipart/form-data">
                         <label className="col-form-label col-form-label-sm">Instrumento:</label>
