@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './assets/css/App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Home from './components/Home';
+import DondeEstamos from './components/DondeEstamos';
+import Productos from './components/Productos';
+import DetalleProducto from './components/DetalleProducto';
+import Form from './components/Form';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <React.Fragment>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/dondeEstamos" component={DondeEstamos} />
+            <Route exact path="/productos" component={Productos} />
+            <Route exact path="/detalleProducto/:id" component={DetalleProducto} />
+            <Route exact path="/formulario" component={Form} />
+          </Switch>
+        </BrowserRouter>
+      </React.Fragment>
   );
 }
 
