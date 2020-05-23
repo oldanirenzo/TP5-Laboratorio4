@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Form from './Form'
 
 class CardList extends Component {
     _isMounted = false;
@@ -22,12 +21,13 @@ class CardList extends Component {
             .then(res => {
                 console.log(res)
             })
+            //Recargo la pagina para que se apliquen los cambios hechos al borrar un producto
         window.location.reload(true)
-
     }
 
     update = () => {
-        window.location.href="/formulario/" + this.props.id
+        // Mando el id del producto, para poder actualizarlo
+        window.location.href = "/formulario/" + this.props.id
     }
     render() {
         return (
