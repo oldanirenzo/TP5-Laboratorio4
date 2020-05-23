@@ -18,6 +18,7 @@ function App() {
             <Route exact path="/productos" component={Productos} />
             <Route exact path="/detalleProducto/:id" component={DetalleProducto} />
             <Route exact path="/formulario" component={Form} />
+            <Route exact path="/formulario/:id" component={Form} />
           </Switch>
         </BrowserRouter>
       </React.Fragment>
