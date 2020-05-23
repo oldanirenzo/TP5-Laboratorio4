@@ -1,24 +1,18 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Form from './Form'
 
 class CardList extends Component {
     _isMounted = false;
+    modificar = false;
     constructor(props) {
         super(props)
 
         this.state = {
+            nombre: '',
             id: ''
         }
     }
-
-    componentDidMount() {
-        this._isMounted = true;
-    }
-
-    componentWillUnmount() {
-        this._isMounted = false
-    }
-
     borrar = (e) => {
 
         axios({
@@ -28,12 +22,13 @@ class CardList extends Component {
             .then(res => {
                 console.log(res)
             })
-        document.getElementById("tarjetaProductos").reset();
-            window.location.replace('')
+        window.location.reload(true)
 
     }
 
-
+    update = () => {
+        window.location.href="/formulario/" + this.props.id
+    }
     render() {
         return (
             <form id="tarjetaProductos">
@@ -51,13 +46,15 @@ class CardList extends Component {
                                 <p className="card-text"><small className="text-muted">{this.props.cantidadVendida} vendidos</small></p>
                                 <div className="btn-group-vertical">
                                     <button type="button" className="btn btn-danger" onClick={this.borrar}>Borrar</button>
-                                    <button type="button" className="btn btn-primary" >Modificar</button>
+                                    <button type="button" className="btn btn-primary" onClick={this.update}>Modificar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div >
-            </form>)
+            </form>
+        )
+
     }
 }
 
