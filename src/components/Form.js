@@ -5,7 +5,6 @@ import NavBar from './NavBar';
 class Form extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             instrumento: '',
             descripcion: '',
@@ -14,22 +13,20 @@ class Form extends Component {
             precio: '',
             costo: '',
             cantidadVendida: '',
-            imagen: null
+            imagen: null,
+            key: 'reset'
         }
     }
-
     submitHandler = (e) => {
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
             e.preventDefault();
             e.stopPropagation();
         }
-
         e.preventDefault();
-        console.log(this.state);
-
-        //npm install axios -save  
-        //Axios es un paquete que es util para hacer llamadas al servidor.
+        // npm install axios -save  
+        // Axios es un paquete que es util para hacer llamadas al servidor.
+        // Mando todos los datos para que se guarden en el servidor
         axios({
             method: 'post',
             url: 'http://localhost:9001/api/v1/instrumento/save',
@@ -43,49 +40,46 @@ class Form extends Component {
                 "modelo": this.state.modelo,
                 "precio": this.state.precio
             }
-        })
-            .then(response => {
-                console.log(JSON.stringify(response));
-
-                this.setState({ instrumento: '' });
-                this.setState({ descripcion: '' });
-                this.setState({ marca: '' });
-                this.setState({ modelo: '' });
-                this.setState({ precio: '' });
-                this.setState({ costo: '' });
-                this.setState({ cantidadVendida: '' });
-            })
-            .catch(error => {
+        }).catch(error => {
                 console.log('Error' + error);
             })
+
+        //Creo un FormData donde guardare la imagen
         const fd = new FormData();
+
+        // Guardo la imagen, y su nombre para mandar
         fd.append('file', this.state.imagen, this.state.imagen.name);
+
+        // Envio la imagen al servidor
         axios.post('http://localhost:9001/api/v1/instrumento/uploadFile', fd)
             .then(res => {
                 console.log(res)
             })
-    }
+            .then(response =>{
+                this.setState({imagen: null})
+            })
 
+            document.getElementById("formNuevo").reset()
+
+    }
     handleInputChange = e => {
         this.setState({
             [e.target.name]: e.target.value
         });
     }
-
     imagenChange = (e) => {
         this.setState({
             [e.target.name]: e.target.files[0]
         });
     }
 
-
     render() {
         return (
             <React.Fragment>
                 <NavBar></NavBar>
-                
+
                 <div className="container w-50 pt-3">
-                    <form onSubmit={this.submitHandler} className="form-group" encType="multipart/form-data">
+                    <form onSubmit={this.submitHandler} className="form-group" encType="multipart/form-data" id="formNuevo">
                         <label className="col-form-label col-form-label-sm">Instrumento:</label>
                         <input className="form-control" type="text" placeholder="Nombre producto" name="instrumento" id="instrumento" onChange={this.handleInputChange}></input>
                         <br /><label className="col-form-label col-form-label-sm">Descripcion:</label>
@@ -101,19 +95,13 @@ class Form extends Component {
                         <br /><label className="col-form-label col-form-label-sm">Cantidad vendida:</label>
                         <input className="form-control" type="number" placeholder="Cantidad vendidos" name="cantidadVendida" id="cantidadVendida" onChange={this.handleInputChange}></input>
                         <br />
-
-                        <input type="file" className="form-control-file" name="imagen" id="imagen" onChange={this.imagenChange} />
-
+                        <input type="file" className="form-control-file" name="imagen" id="imagen" onChange={this.imagenChange} required />
                         <br />
                         <button type="submit" className="btn btn-primary">Submit</button>
-
                     </form >
                 </div>
-
-
             </React.Fragment>
         )
     }
 }
-
 export default Form
