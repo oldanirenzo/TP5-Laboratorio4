@@ -25,7 +25,6 @@ class Productos extends Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({ db: responseJson });
-                console.log(this.db)
             });
 
     }
