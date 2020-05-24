@@ -15,11 +15,11 @@ class Home extends Component {
 
             <React.Fragment>
                 <NavBar></NavBar>
-                <div className="jumbotron jumbotron-fluid">
+                <div className="jumbotron jumbotron-fluid text-center" style={{background: "green"}}>
                     <div className="container">
 
-                        <h1 className="display-1">Musical Hendrix</h1>
-                        <p className="lead">Musical Hendrix es una tienda de instrumentos musicales con ya más de 15 años de experiencia. Tenemos el conocimiento y la capacidad como para informarte acerca de las mejores elecciones para tu compra musical.</p>
+                        <h1 className="display-1"><b>Musical Hendrix</b></h1>
+                        <p className="lead"><b>Musical Hendrix es una tienda de instrumentos musicales con ya más de 15 años de experiencia. Tenemos el conocimiento y la capacidad como para informarte acerca de las mejores elecciones para tu compra musical.</b></p>
                     </div>
                 </div>
 
